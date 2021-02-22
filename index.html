@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Steam Achievement Formatter</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	 crossorigin="anonymous">
+	<link href="./achievement.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript" src="./achievement.js?ver=1.1"></script>
+
+	<script type="text/javascript" src="./prototype.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	 crossorigin="anonymous"></script>
+	<script>jQuery.noConflict();</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	 crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	 crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+	<header>
+		<h1 class="text-center">Steam Achievement Formatter<br/></h1>
+	</header>
+
+	<div class="container-fluid">
+
+		<div class="row">
+
+			<div class="col-12 col-md-6">
+
+				<div class="card mt-3 align-items-center w-100">
+
+					<h2 class="card-header w-100">Enter Profile Details</h2>
+
+					<div class="card-body">
+
+						<dl>
+							<dt>Requirements:</dt>
+							<dd>- Need an
+								<a href='http://astats.astats.nl/astats/index.php'>astats</a> profile.</dd>
+							<dd>- You need to know your <a href="https://steamid.io/">steamid64 </a>(17 digit number). 
+						</dl>
+
+						<br/> Steamid64 or Username
+						<br/>
+						<div class="input-group">
+							<input name="userid" id="steamid" type='text' autocomplete="on" required="required">
+							<input class="input-group-append btn btn-primary" id='button' type='submit' value='Load Games'>
+							
+						</div>
+						<br/>
+						<input class="btn btn-secondary" data-toggle="modal" data-target="#usernameModal" value='Create a Username'>
+
+					</div>
+					<div class="card-footer w-100 text-center">
+						Using Steam id:
+						<span id="entered"> None Yet</span>
+					</div>
+					
+				</div>
+
+				<div class="card mt-3 align-items-center">
+
+					<h2 class="card-header w-100">Options</h2>
+
+					<div class="card-body align-items-center w-100">
+
+						<div class="row">
+							<label class="col-6">Presets</label>
+							<div class="col-6">
+								<select id='presets'>
+									<option value="amap">Fit As Many Games As Possible</option>
+									<option value="info">Show as much info as possible</option>
+									<option value="mine">Creator's Favorite</option>
+								</select>
+
+							</div>
+						</div>
+													
+						<div class="row">
+							<label class="col-6">Date Grouping</label>
+							<div class="col-6">
+								<div>
+									<input type="radio" name="split" id="month" value="month" /></label>
+									<label >Group by Month</label>
+								</div>
+								<div>
+									<input type="radio" name="split" id="year" value="year" checked="checked" />
+									<label>Group by Year</label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<label class="col-6">Seperation</label>
+							<div class="col-6">
+								<select id='charOption' >
+									<option value="*">Asterisk *</option>
+									<option value=":">Colon :</option>
+									<option value="`">Accent `</option>
+									<option value=".">Period .</option>
+									<option value="-">Dash -</option>
+									<option value="blank">Blank Spaces</option>
+									<option value="single">Single Space</option>
+									<option value="">No Spacing</option>
+								</select>								
+							</div>
+						</div>	  
+							
+						<div class="row">
+							<label class="col-6">Sorting</label>
+							<div class="col-6">
+								<select id='sortOption'>
+										<option value="dateD">Date Descending</option>
+										<option value="dateA">Date Ascending</option>
+								</select>
+							</div>
+						</div>	  	
+
+						<div class="row">
+							<label class="col-6">Enclosing</label>
+							<div class="col-6">
+								<select id="closeOption">
+									<option value="[]">Square Brackets []</option>
+									<option value="()">Parenthesis ()</option>
+									<option value="{}">Brackets {}</option>
+									<option value="none">None</option>
+								</select>
+							</div>
+						</div>	  
+
+						<div class="row">
+							<div class="col-6"></div>
+							<div class="col-6">
+								<span><input type="checkbox" id="num_column" name="num_column" value="num_column" checked="checked" /> Show number of achievements for each game</span>
+							</div>
+						</div>	
+	
+						<div class="row">
+							<div class="col-6"></div>
+							<div class="col-6">
+								<span><input type="checkbox" id="date_column" name="date_column" value="date_column" checked="checked" /> Show date each game was completed</span>
+							</div>							
+						</div>
+
+						<div class="row">
+							<label class="col-6">Games to Exclude</label>
+							<div class="col-6">
+								<input type="text" id="exclude" name="exclude" value="" placeholder="Comma Separated List" /> 
+							</div>							
+						</div>
+
+					</div>
+
+					<div class="card-footer w-100 text-center">
+						<button id="updater" onclick=achievement.php>Update Text</button>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="col-12 col-md-6">
+				<div class="card mt-3 h-100">
+
+					<h2 class="card-header">
+						Output
+					</h2>
+
+					<div class="card-body">
+						<textarea class="w-100" id="content" readonly>Copy/Paste from here</textarea>
+						<p>Copy and paste the text that is output above into your steam custom info box.
+							<br/> 
+						</p>
+						<button id="copyButton" disabled="disabled">Nothing to Copy</button>
+						<br/><br/>
+						<dl>
+							<dt>Notes:</dt>
+							<dd>- Text will look misaligned on this webpage, but looks better once placed in steam.</dd>
+							<dd>- Steam limits the amount of text you can place in an info box. If you have lots of games, use the "fit as many as possible" preset</dd>
+						</dl>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+	<!-- UserName Modal -->
+	<div class="modal fade" id="usernameModal" tabindex="-1" role="dialog" aria-labelledby="usernameModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+
+					<h5 class="modal-title" id="usernameModalLabel">Create a Username</h5>
+
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+
+				</div>
+
+				<div class="modal-body">
+					
+					<p>Associate a name with your steamid64 for use on return visits to the site</p>
+
+					<label>Username</label></br>
+					<input id='newUser' type='text' placeholder="New User" required/>
+					</br></br>
+					<label>SteamId64</label></br>
+					<input id='newID' type='text' placeholder="17 digit value" pattern="[0-9]{17}" required  />
+				
+				</div>
+				
+				<div class="modal-footer">
+					<button type='submit' class="btn btn-primary mr-auto" id='newButton' data-dismiss="modal">Create New User</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+</body>
+
+</html>
